@@ -18,24 +18,26 @@ var questions = [
   ];
   
   var score = 0;
-  var currentQuestionIndex = 0;
-  var questionsContainer = document.getElementById("questions-container");
-  var scoreElement = document.getElementById("score");
   
-  function displayQuestion() {
-    var currentQuestion = questions[currentQuestionIndex];
-    var questionElement = document.createElement("div");
-    questionElement.classList.add("question");
-    questionElement.innerHTML = `
-      <p>${currentQuestion.question}</p>
-      <input type="text" id="user-answer" placeholder="Enter your answer" />
-      <button onclick="checkAnswer()">Submit</button>
-    `;
-    questionsContainer.appendChild(questionElement);
+  function play(question, answer) {
+    var userAnswer = prompt(question);
+    if (userAnswer.toLowerCase() === answer) {
+      console.log("You are right!");
+      score = score + 1;
+    } else {
+      console.log("You are wrong!");
+    }
+    console.log("Your score is ", score);
+    console.log("--------------------");
   }
   
-  function checkAnswer() {
-    var userAnswer = document.getElementById("user-answer").value.toLowerCase();
-    var currentQuestion = questions[currentQuestionIndex];
-    if (userAnswer
+  for (var i = 0; i < questions.length; i++) {
+    var currentQuestion = questions[i];
+    play(currentQuestion.question, currentQuestion.answer);
+  }
+  
+  console.log("Your total score is ", score);
+  
+  // Update score in HTML
+  document.getElementById("score").textContent = score;
   
